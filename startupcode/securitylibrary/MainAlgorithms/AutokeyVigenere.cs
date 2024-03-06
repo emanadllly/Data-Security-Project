@@ -10,7 +10,35 @@ namespace SecurityLibrary
     {
         public string Analyse(string plainText, string cipherText)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            string key = "";
+            string temp = "";
+            char ch;
+            int index = 0, count = 0;
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                ch = (char)((((cipherText.ToLower()[i] - plainText[i]) + 26) % 26) + 'a');
+                if (ch == plainText[index])
+                {
+                    count++;
+                    index++;
+                    temp += ch;
+                }
+                else
+                {
+                    key += temp;
+                    temp = "";
+                    count = 0;
+                    index = 0;
+                    key += ch;
+                }
+                if (count == 3)
+                {
+                    Console.WriteLine(temp);
+                    break;
+                }
+            }
+            return key;
         }
 
         public string Decrypt(string cipherText, string key)
@@ -40,14 +68,10 @@ namespace SecurityLibrary
                 index++;
                 index %= decrypted.Length;
                 cipherIndex = cipherText[i] - 'A';
-                Console.WriteLine("Cipher Index: " + cipherIndex);
                 keyIndex = keyStream[i] - 'a';
-                Console.WriteLine("Key Index: " + keyIndex);
                 decrypted[i] = (char)((((cipherIndex - keyIndex) + 26) % 26) + 'a');
             }
             string result = new string(decrypted);
-            Console.WriteLine("The Key Stream: " + new string(keyStream));
-            Console.WriteLine("The result: " + result);
             return result;
         }
 

@@ -28,3 +28,12 @@ G:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPacka
 G:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
 G:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
 >>>>>>> cb936a89c8edea1d710a05b0b6de199af816a756
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityPackageTest.pdb
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\bin\Debug\SecurityLibrary.pdb
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.AssemblyReference.cache
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CoreCompileInputs.cache
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.csproj.CopyComplete
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.dll
+F:\Data-Security-Project\startupcode\SecurityPackageTest\obj\Debug\SecurityPackageTest.pdb
