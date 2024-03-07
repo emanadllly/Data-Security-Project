@@ -10,17 +10,71 @@ namespace SecurityLibrary
     {
         public string Analyse(string plainText, string cipherText)
         {
-            throw new NotImplementedException();
+
+
+            plainText = plainText.Trim().ToLower();
+            cipherText = cipherText.Trim().ToLower();
+
+            char[] key = new char[26];
+
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                //Generate the ASCII code of chars of plainText
+                int index = (Convert.ToInt32(plainText[i]) - 97) % 26;
+                //Map char value to the right index in key
+                key[index] = cipherText[i];
+            }
+            int ascii_value = 0;
+
+            //Fill the empty indicies in the key array with unique chars
+            for (int i = 0; i < 26; i++)
+            {
+                if (key[i] == '\0')
+                {
+                    while (key.Contains(Convert.ToChar(ascii_value+97)))
+                    {
+                        ascii_value = (ascii_value + 1) % 26;
+                    }
+                    key[i] = Convert.ToChar(ascii_value+97);
+                }
+                ascii_value = (ascii_value + 1) % 26;
+            }
+            return string.Concat(key).Trim();
+
         }
 
         public string Decrypt(string cipherText, string key)
         {
-            throw new NotImplementedException();
+            string plainText = " ";
+
+            cipherText = cipherText.Trim().ToLower();   
+            key = key.Trim().ToLower();
+
+            //Get the ASCII code from the index of chipher char in key array +97
+            for(int i=0;i < cipherText.Length; i++)
+            {
+                int index = Convert.ToInt32(key.IndexOf(cipherText[i]));
+                plainText += Convert.ToChar(index + 97);
+            }
+
+            return plainText.Trim();
         }
 
         public string Encrypt(string plainText, string key)
         {
-            throw new NotImplementedException();
+            string encryptedText = " ";
+
+            plainText = plainText.Trim().ToLower();
+            key = key.Trim().ToLower();
+
+            //Get index of key from ASCII code of plaintext char 
+            for (int i = 0; i < plainText.Length; i++)
+            {
+                int index = (Convert.ToInt32(plainText[i]) - 97) % 26;
+                encryptedText += key[index];
+            }
+
+            return encryptedText.Trim();
         }
 
         /// <summary>
@@ -56,7 +110,47 @@ namespace SecurityLibrary
         /// <returns>Plain text</returns>
         public string AnalyseUsingCharFrequency(string cipher)
         {
-            throw new NotImplementedException();
+            
+            cipher = cipher.Trim().ToLower();
+
+            Dictionary<char, long> char_frequency = new Dictionary<char, long>();
+            //Calculate the frequency of each char
+            for (int i = 0; i < cipher.Length; i++)
+            {
+                if (char_frequency.ContainsKey(cipher[i]))
+                {
+                    char_frequency[cipher[i]]++;
+                }
+                else
+                {
+                    char_frequency[cipher[i]] = 1;
+                }
+            }
+
+            //Order the chars by the frequency
+            char_frequency = char_frequency.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+
+            //Frequency table
+            char[] frequencyArray = { 'e', 't', 'a', 'o', 'i', 'n', 's', 'r', 'h', 'l', 'd', 'c', 'u', 'm', 'f', 'p', 'g', 'w', 'y', 'b', 'v', 'k', 'x', 'j', 'q', 'z' };
+
+
+            Dictionary<char, char> key = new Dictionary<char, char>();
+            int count = 0;
+            //Assign each char according to its frequency to the corresponding char in char table
+            for (int i = char_frequency.Count - 1; i >= 0; i--)
+            {
+                key[char_frequency.ElementAt(i).Key] = frequencyArray[count];
+                count++;
+            }
+
+           //Extract the plainText
+            string plainText = " ";
+            for (int i = 0; i < cipher.Length; i++)
+            {
+                plainText += key[cipher[i]];
+            }
+            
+            return plainText.Trim();
         }
     }
 }
